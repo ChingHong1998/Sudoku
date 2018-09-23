@@ -1,0 +1,6 @@
+(load "C:/Users/ching/Documents/sudoku/dfsSudoku.lisp")
+(load "C:/Users/ching/Documents/sudoku/sudokuExample.lisp")
+(print-board *sudoku-example*)
+(print-board (solve-sudoku *sudoku-example*))
+(print-board *sudoku-example2*)
+(print-board (solve-sudoku *sudoku-example2*))
