@@ -36,21 +36,21 @@
 (defun board-has-duplicates-p (b)
   ;; T if there is a duplicate number in a row, column, or square
   
-  (labels ((find-duplicates (x l)
-			    (cond ((null x) '())
-				  ((and (numberp (car x))
-					(member (car x) l)) t)
-				  (t (find-duplicates (cdr x)
-						      (cons (car x) l)))))
+  (labels ((find-duplicates (x l) ; labels defines a local function named find-duplicates
+			    (cond ((null x) '())	;if x is null, return an empty list
+				  ((and (numberp (car x)) ; if first element type of x is number AND 
+					(member (car x) l)) t) ; first element of x is member of l then return t
+				  (t (find-duplicates (cdr x); else pass the rest of x in find-duplicates as 1st parameter 
+						      (cons (car x) l))))) ;and combination of first element of x and l as second parameter
 	   
            ;; check whether there are duplicates in a given row
-	   (check-row (n b)
-		      (find-duplicates (subseq b (* n 9) (+ (* n 9) 9))
+	   (check-row (n b) ; local defined a function named check-row
+		      (find-duplicates (subseq b (* n 9) (+ (* n 9) 9)) ; find-duplicates of row 
 				       '()))
 
 	   ;; check whether there are duplicates in a given column
-	   (check-column (n b)
-			 (let ((column (mapcar (lambda (x)
+	   (check-column (n b) ;local defined a function named check-row
+			 (let ((column (mapcar (lambda (x) ; 
 						 (nth (+ n (* x 9)) b))
 					       '(0 1 2 3 4 5 6 7 8))))
 			   (find-duplicates column '())))
