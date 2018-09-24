@@ -80,17 +80,17 @@
 
 (defun solve-sudoku (b)
   (with-open-stream ;performs a series of operations on stream, returns a value
-   (*standard-output* (make-broadcast-stream)) ; a sream "make-broadcast-stream" is named as "*standard-output*"
-   (labels ((depth-first (b n)
-			 (cond ((= n 81)
-				(return-from solve-sudoku b))
-			       ((eq (nth n b) '-)
-				(loop for x from 1 to 9 do
-				      (let ((newb
-					     (append (subseq b 0 n)
-						     (cons x (subseq b (1+ n) 81)))))
+   (*standard-output* (make-broadcast-stream)) ; a stream "make-broadcast-stream" is named as "*standard-output*" is opened
+   (labels ((depth-first (b n) ;local define a function called depth-first
+			 (cond ((= n 81) 
+				(return-from solve-sudoku b)) ; Returns control and  values if n == 81
+			       ((eq (nth n b) '-) ; if n-th of b equal to '-'
+				(loop for x from 1 to 9 do ; range of x :1-9 do
+				      (let ((newb ; let newb = something that
+					     (append (subseq b 0 n) ; append (b[0-n]) 
+						     (cons x (subseq b (1+ n) 81))))) ; with (x and b[(n+1) - 81]) which is rest of the array
 					
-					(cond ((not (board-has-duplicates-p newb))
-					       (depth-first newb (1+ n)))))))
-			       (t (depth-first b (1+ n))))))
-	   (depth-first b 0))))
+					(cond ((not (board-has-duplicates-p newb)) ;while newb is not duplicate, 
+					       (depth-first newb (1+ n))))))) ;depth-first search for the next number
+			       (t (depth-first b (1+ n)))))) ; else depth-first search b with increment n
+	   (depth-first b 0)))) ; return depth-first search (recursive call)
