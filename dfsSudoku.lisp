@@ -56,31 +56,31 @@
 			   (find-duplicates column '())))
 
 	   ;; check whether there are duplicates in a given square
-	   (check-square (n b)
-			 (let* ((beg (* 2 (truncate (/ n 3))))
-				(beg-1 (+ (* 3 n) (* beg 9)))
-				(beg-2 (+ beg-1 9))
-				(beg-3 (+ beg-2 9))
-				(square (append (append (subseq b beg-1
+	   (check-square (n b) ; if n = 1
+			 (let* ((beg (* 2 (truncate (/ n 3)))) ; beg = 0
+				(beg-1 (+ (* 3 n) (* beg 9))); beg-1 = 3
+				(beg-2 (+ beg-1 9)) ; beg-2 = 12
+				(beg-3 (+ beg-2 9)) ; beg-3 = 21
+				(square (append (append (subseq b beg-1 ; (subseq b 3 6)
 								(+ 3 beg-1))
-							(subseq b beg-2
+							(subseq b beg-2 ; (subseq b 12 15)
 								(+ 3 beg-2)))
-						(subseq b beg-3 (+ 3 beg-3)))))
+						(subseq b beg-3 (+ 3 beg-3))))) ; (subseq b 21 24) square = {element 3-6 and element 12-15 and element 21-24}
 
-			   (find-duplicates square '()))))
+			   (find-duplicates square '())))) ; (find-duplicates int that square)
 
 	  ;; check all rows, columns, and squares
-	  (loop for n from 0 to 8 do
-		(print (check-row 8 b))
-		(cond ((or (check-row n b) (check-column n b)
-			   (check-square n b))
-		       (return-from board-has-duplicates-p t))))))
+	  (loop for n from 0 to 8 do ;loop through all the number
+		(print (check-row 8 b)) ; print row by row
+		(cond ((or (check-row n b) (check-column n b) ; if row, colum 
+			   (check-square n b)) ;and square dont have duplicate numbers
+		       (return-from board-has-duplicates-p t)))))) ; return board-has-duplicates-p true
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun solve-sudoku (b)
-  (with-open-stream
-   (*standard-output* (make-broadcast-stream))
+  (with-open-stream ;performs a series of operations on stream, returns a value
+   (*standard-output* (make-broadcast-stream)) ; a sream "make-broadcast-stream" is named as "*standard-output*"
    (labels ((depth-first (b n)
 			 (cond ((= n 81)
 				(return-from solve-sudoku b))
