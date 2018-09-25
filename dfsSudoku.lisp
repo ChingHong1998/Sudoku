@@ -1,16 +1,4 @@
 ;;; A depth-first search sudoku solver
-;;;
-;;; Last updated: 20180127
-;;;
-;;; Instructions: check out the example in sudoku-example.lisp
-;;;               and either load the puzzle in the example or
-;;;               input your own.
-
-;;;               Example:
-;;;               (load "sudoku-example.lisp")
-;;;               (load "sudoku-solver.lisp")
-;;;               (print-board *sudoku-example*)
-;;;               (print-board (solve-sudoku *sudoku-example*))
 
 
 (defun print-board (b)
@@ -50,10 +38,10 @@
 
 	   ;; check whether there are duplicates in a given column
 	   (check-column (n b) ;local defined a function named check-row
-			 (let ((column (mapcar (lambda (x) ; 
-						 (nth (+ n (* x 9)) b))
+			 (let ((column (mapcar (lambda (x) ; create a list called column
+						 (nth (+ n (* x 9)) b)) ; that take n-th column of b
 					       '(0 1 2 3 4 5 6 7 8))))
-			   (find-duplicates column '())))
+			   (find-duplicates column '()))) ; pass in the find-duplicates function
 
 	   ;; check whether there are duplicates in a given square
 	   (check-square (n b) ; if n = 1
