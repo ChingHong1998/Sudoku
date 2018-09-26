@@ -38,10 +38,10 @@
 
 	   ;; check whether there are duplicates in a given column
 	   (check-column (n b) ;local defined a function named check-row
-			 (let ((column (mapcar (lambda (x) ; 
-						 (nth (+ n (* x 9)) b))
+			 (let ((column (mapcar (lambda (x) ; create a list called column
+						 (nth (+ n (* x 9)) b)) ; that take n-th column of b
 					       '(0 1 2 3 4 5 6 7 8))))
-			   (find-duplicates column '())))
+			   (find-duplicates column '()))) ; pass in the find-duplicates function
 
 	   ;; check whether there are duplicates in a given square
 	   (check-square (n b) ; if n = 1
