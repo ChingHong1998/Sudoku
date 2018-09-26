@@ -1,18 +1,6 @@
 ;;; A depth-first search sudoku solver
-;;;
-;;; Last updated: 20180127
-;;;
-;;; Instructions: check out the example in sudoku-example.lisp
-;;;               and either load the puzzle in the example or
-;;;               input your own.
 
-;;;               Example:
-;;;               (load "sudoku-example.lisp")
-;;;               (load "sudoku-solver.lisp")
-;;;               (print-board *sudoku-example*)
-;;;               (print-board (solve-sudoku *sudoku-example*))
-
-
+;;; print the board
 (defun print-board (b)
   (let ((n 0))
     (loop for x in b do
